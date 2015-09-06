@@ -17,7 +17,7 @@
 var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
     "use strict";
     var setArrtibute = (function loadr$_forkSetArrtibute () {
-            if (typeof duc.createElement("div").setAttribute === FUNCTION) {
+            if (typeof doc.createElement("div").setAttribute === FUNCTION) {
                 return function loadr$_setArrtibute (element, name, value) {
                     element.setAttribute(name, value);
                 };

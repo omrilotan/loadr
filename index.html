@@ -1,19 +1,49 @@
 <!doctype html>
 <html>
     <body>
-        <div>
-            <span></span>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Button</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div id="one" class="one"><span>Mister</span></div>
+                    </td>
+                    <td>
+                        <button onclick="one()">Load CSS - change div style</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="two"></div>
+                    </td>
+                    <td>
+                        <button onclick="two()">Load JS - put text in here</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
         <script src="loadr.js"></script>
         <script>
-loadr("styles/rules", {
-    "div": "height: 30px; background: green;",
-    "div span:before": "content: \"hi\""
-}, function () {
-    console.log("done");
-});
-loadr("script/file", "js.js", function () { console.log("I've loaded js.js"); });
-loadr("script/file", "js.js", function () { console.log("I've loaded js.js"); });
+function one () {
+    loadr("styles/rules", {
+        ".one": "background: green; color: white; padding: 0 .25em;",
+        ".one span:before": "content: \"Hello \""
+    }, function () {
+        alert("done");
+    });
+}
+
+function two () {
+    loadr("script/file", "writeIn.js", function () {
+        writeIn(document.getElementById("two"), "Put some text in <this one>");
+    });
+}
         </script>
     </body>
 </html>
