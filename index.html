@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <body>
+        <div>
+            <span></span>
+        </div>
+        <script src="addResource.js"></script>
+        <script>
+addResource("styles/rules", {
+    "div": "height: 30px; background: green;",
+    "div span:before": "content: \"hi\""
+}, function () {
+    console.log("done");
+});
+addResource("script/file", "js.js", function () { console.log("I've loaded js.js"); });
+addResource("script/file", "js.js", function () { console.log("I've loaded js.js"); });
+        </script>
+    </body>
+</html>
