@@ -45,7 +45,7 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
                 sheet.appendChild(doc.createTextNode(selector + "{" + rules + "}"));
             }
         },
-        CSS_create = function loadr$CSS_create (url) {
+        css_create = function loadr$css_create (url) {
             var element = doc.createElement("link"),
                 attributes = {
                     "type": "text/css"
@@ -57,7 +57,7 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
             }
             return setAttributes(element, attributes);
         },
-        CSS_element = function loadr$CSS_element (content) {
+        css_element = function loadr$css_element (content) {
             var element = doc.createElement("style");
             if (typeof content === STRING) {
                 if (typeof element.styleSheet === OBJECT) {
@@ -69,11 +69,11 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
             doc.head.appendChild(element);
             return element;
         },
-        CSS_rules = function loadr$CSS_rules (content) {
+        css_rules = function loadr$css_rules (content) {
             var sheet = typeof doc.styleSheets === OBJECT &&
                     doc.styleSheets.length > 0 ?
                     doc.styleSheets[0] :
-                    CSS_element(),
+                    css_element(),
                 name;
             for (name in content) {
                 if (content.hasOwnProperty(name)) {
@@ -81,15 +81,15 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
                 }
             }
         },
-        CSS_reference = function loadr$CSS_reference (content, callback) {
-            var element = CSS_create(content);
+        css_reference = function loadr$css_reference (content, callback) {
+            var element = css_create(content);
             element.onload = callback;
             doc.head.appendChild(element);
         },
-        CSS_references = function loadr$CSS_references (array, callback) {
+        css_references = function loadr$css_references (array, callback) {
             var loaded = 0;
-            array.forEach(function loadr$CSS_referencesArray (item) {
-                CSS_reference(item, function loadr$_CSS$referencesAdd () {
+            array.forEach(function loadr$css_referencesArray (item) {
+                css_reference(item, function loadr$_CSS$referencesAdd () {
                     loaded++;
                     if (loaded === array.length && typeof callback === FUNCTION) {
                         callback();
@@ -98,7 +98,7 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
             });
         },
 
-        JS_create = function loadr$JS_create (url) {
+        js_create = function loadr$js_create (url) {
             var element = doc.createElement("script"),
                 attributes = {
                     "type": "text/javascript"
@@ -109,8 +109,8 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
             setAttributes(element, attributes);
             return element;
         },
-        JS_element = function loadr$JS_element (content) {
-            var element = JS_create();
+        js_element = function loadr$js_element (content) {
+            var element = js_create();
             try {
                 element.appendChild(doc.createTextNode(content));
             } catch (e) {
@@ -118,15 +118,15 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
             }
             doc.head.appendChild(element);
         },
-        JS_reference = function loadr$JS_reference (content, callback) {
-            var element = JS_create(content);
+        js_reference = function loadr$js_reference (content, callback) {
+            var element = js_create(content);
             element.onload = callback;
             doc.head.appendChild(element);
         },
-        JS_references = function loadr$JS_references (array, callback) {
+        js_references = function loadr$js_references (array, callback) {
             var loaded = 0;
             array.forEach(function loadr$_JS$referencesArray (item) {
-                JS_reference(item, function loadr$JS_referencesAdd () {
+                js_reference(item, function loadr$js_referencesAdd () {
                     loaded++;
                     if (loaded === array.length && typeof callback === FUNCTION) {
                         callback();
@@ -136,15 +136,15 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
         },
         map = {
             styles: {
-                text:  CSS_element,
-                rules: CSS_rules,
-                file:  CSS_reference,
-                files: CSS_references
+                text:  css_element,
+                rules: css_rules,
+                file:  css_reference,
+                files: css_references
             },
             script: {
-                text:  JS_element,
-                file:  JS_reference,
-                files: JS_references
+                text:  js_element,
+                file:  js_reference,
+                files: js_references
             }
         };
     return function loadr (/* type, content, callback */) {
