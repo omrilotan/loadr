@@ -70,9 +70,10 @@ var loadr = (function __loadr__ (doc, FUNCTION, OBJECT, STRING) {
             return element;
         },
         css_rules = function loadr$css_rules (content) {
-            var sheet = typeof doc.styleSheets === OBJECT &&
-                    doc.styleSheets.length > 0 ?
-                    doc.styleSheets[0] :
+            var styleSheets = doc.styleSheets,
+                sheet = typeof styleSheets === OBJECT &&
+                    styleSheets.length > 0 ?
+                    styleSheets[0] :
                     css_element(),
                 name;
             for (name in content) {
