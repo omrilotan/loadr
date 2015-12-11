@@ -1,0 +1,11 @@
+#OS
+.DS_Store
+.Trash-*
+
+node_modules
+.git
+.npm
+.original
+*.log
+*.pid
+*.swp
